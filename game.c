@@ -1,6 +1,6 @@
 #include <LPC21xx.h>
 #include <stdlib.h>
-#include "init_lcd.c"
+#include "header.h"
 
 #define sw_1 16 // Forward
 #define sw_2 17 // Backward
@@ -8,27 +8,24 @@
 
 
 
-void numlcd(int a)	// Converting number to each char and displaying on LCD
-{
-	CharLCD((a/10)+'0');
-	CharLCD((a%10)+'0');
-}
 
 
-//	int arr2[8]={0x0e,0x0e,0x0e,0x0e,0x1f,0x1f,0x1f,0x00}; // GUN -1
-	int arr1[8]={0x11,0x11,0x1f,0x1f,0x1f,0x11,0x11,0x00}; // robot -1
-	//int shoot[8]={0x04,0x04,0x04,0x04,0x04,0x04,0x04,0x04}; // bullet 
-	int arr[8]={0x00,0x00,0x0e,0x0e,0x0e,0x1f,0x1f,0x00};//gun - 0
-	int shoot[8]={0x04,0x04,0x0e,0x0e,0x0e,0x1f,0x1f,0x00}; //fire -2
-	int hu[8]={0x0e,0x0e,0x0e,0x15,0x04,0x0a,0x11,0x00};// hu -3
-	int main()
+
+	int arr1[8]={0x11,0x11,0x1f,0x1f,0x1f,0x11,0x11,0x00}; // Robot -Index(1)
+	int arr[8]={0x00,0x00,0x0e,0x0e,0x0e,0x1f,0x1f,0x00};//Gun - Index(0)
+	int shoot[8]={0x04,0x04,0x0e,0x0e,0x0e,0x1f,0x1f,0x00}; //Fire -Index(2)
+	int hu[8]={0x0e,0x0e,0x0e,0x15,0x04,0x0a,0x11,0x00};// Human Symbol -Index(3)
+	int main() 
 {
 	int i,time,ran_pos,gun_pos,seed,score_cnt=0,time_end=0,time_cnt=60,x,tt;
 	int time_set=180; // Time to display Robots (3 sec)
 	int level_1=1,level_2=0,level_3=0	;
 	int ran_x,ran_flag=0;
-	IODIR0 = 0xff00ff;
-	initlcd();
+	
+	IODIR0 = 0xff00ff; // DIRECTION FOR PINS
+	
+	initlcd(); // LCD INITIALISATION
+	
   srand(1234);  // You can use a constant for testing
 	cmdlcd(0x40);
 		for(i=0;i<8;i++)
@@ -47,7 +44,7 @@ void numlcd(int a)	// Converting number to each char and displaying on LCD
 	{
 		CharLCD(hu[i]);
 	}
-	gun_pos=-1; // making gun pos -1 
+	gun_pos=-1; // Making gun pos -1 
 	time_end=0;
 	
 	
@@ -66,12 +63,14 @@ void numlcd(int a)	// Converting number to each char and displaying on LCD
 	cmdlcd(0x80);
 	strlcd("Shoot Robots-");
 	CharLCD(1);
-		delay_ms(800);
+	delay_ms(800);
 	cmdlcd(0x01);
 	
 	time_set=120;
 	score_cnt=0;
+	
 	goto T;
+	
 	while(1)
 	{
 			time_end++;	 // For count sec
@@ -129,13 +128,13 @@ void numlcd(int a)	// Converting number to each char and displaying on LCD
 								x=0;
 							}
 						}
-									if((time_end%60)==0)
-									{
-											time_cnt--;
-											
-									}
-									cmdlcd(0xce);
-									numlcd(time_cnt);				// Displaying time count in sec
+							if((time_end%60)==0)
+							{
+									time_cnt--;
+									
+							}
+							cmdlcd(0xce);
+							numlcd(time_cnt);				// Displaying time count in sec
 		
 							while((( 1 << sw_1)&IOPIN1)==0)
 						{			
@@ -225,7 +224,7 @@ void numlcd(int a)	// Converting number to each char and displaying on LCD
 										cmdlcd(0xce);
 										numlcd(time_cnt);
 									}
-								/*--------------------------------------*/
+							
 								cmdlcd(0xc0+(gun_pos));
 								CharLCD(' ');
 								cmdlcd(0xc0+(--gun_pos));
@@ -250,7 +249,7 @@ void numlcd(int a)	// Converting number to each char and displaying on LCD
 							cmdlcd(0x8e);
 							numlcd(score_cnt);
 							time=time_set;
-						for(tt=0;tt<5;tt++)
+						for(tt=0;tt<5;tt++) 
 						{
 							cmdlcd(0x80+ran_pos);
 							CharLCD(' ');
@@ -296,7 +295,7 @@ void numlcd(int a)	// Converting number to each char and displaying on LCD
 					
 					break;
 			}
-			if((score_cnt==10)&&(level_1==1))
+			if((score_cnt==2)&&(level_1==1)) // END OF LEVE-1 
 			{
 					cmdlcd(0x80);
 					cmdlcd(0x01);
@@ -318,7 +317,7 @@ void numlcd(int a)	// Converting number to each char and displaying on LCD
 					level_2=1;
 				goto T;
 			}
-			if((score_cnt==12)&&(level_2==1))
+			if((score_cnt==1)&&(level_2==1)) // END OF LEVEL-2
 			{
 					cmdlcd(0x80);
 					cmdlcd(0x01);
@@ -352,7 +351,17 @@ void numlcd(int a)	// Converting number to each char and displaying on LCD
 					level_3=1;
 				goto T;
 			}
-			
+			if((score_cnt==12)&&(level_3==1)) // END OF LEVEL -3
+				{
+					cmdlcd(0x01);
+					cmdlcd(0x80);
+					strlcd("CONGRATULATIONS");
+					cmdlcd(0xc0);
+					strlcd("LEVEL REACHED");
+					delay_ms(800);
+					goto END;
+				}
 	} // while
+	END:while(1);
 	
 }
