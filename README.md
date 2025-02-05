@@ -1,4 +1,4 @@
-🚀 A button-controlled shooting game on a 16x4 LCD, built using the LPC2148 microcontroller!
+🚀 A button-controlled shooting game on a 16x2 LCD, built using the LPC2148 microcontroller!
 
 🕹️ Game Overview
 This is a three-level shooting game where the player must eliminate robots while avoiding humans. The game runs on an alphanumeric 16x4 LCD and is controlled using three buttons.
@@ -17,10 +17,10 @@ Controls: Three-button input
 
 🛠️ How to Run the Project
 1️⃣ Simulation (Proteus)
-Open the Proteus project (.dsn file).
+Open the Proteus project (GAME_SIMULATION.pdsprj file).
 Load the HEX file generated from Keil.
 Run the simulation to see the game in action.
 2️⃣ Hardware Implementation
 Flash the compiled binary (.hex) to the LPC2148 microcontroller using Flash Magic.
-Connect the LCD (16x4) and buttons as per the circuit diagram.
+Connect the LCD (16x2) and buttons as per the circuit diagram.
 Power up and start playing!
