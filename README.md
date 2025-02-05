@@ -1,7 +1,7 @@
 🚀 A button-controlled shooting game on a 16x2 LCD, built using the LPC2148 microcontroller!
 
 🕹️ Game Overview
-This is a three-level shooting game where the player must eliminate robots while avoiding humans. The game runs on an alphanumeric 16x4 LCD and is controlled using three buttons.
+This is a three-level shooting game where the player must eliminate robots while avoiding humans. The game runs on an alphanumeric 16x2 LCD and is controlled using three buttons.
 
 🎯 Gameplay Levels:
 1️⃣ Level 1: Shoot 5 robots in 60 seconds to proceed.
