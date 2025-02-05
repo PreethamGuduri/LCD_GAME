@@ -12,7 +12,7 @@ This is a three-level shooting game where the player must eliminate robots while
 Microcontroller Used: LPC2148 (Hardware)
 Simulation Tested On: LPC2124 (Proteus)
 Programmed In: C (Keil uVision)
-Display: 16x4 Alphanumeric LCD
+Display: 16x2 Alphanumeric LCD
 Controls: Three-button input
 
 🛠️ How to Run the Project
