@@ -14,3 +14,13 @@ Simulation Tested On: LPC2124 (Proteus)
 Programmed In: C (Keil uVision)
 Display: 16x4 Alphanumeric LCD
 Controls: Three-button input
+
+🛠️ How to Run the Project
+1️⃣ Simulation (Proteus)
+Open the Proteus project (.dsn file).
+Load the HEX file generated from Keil.
+Run the simulation to see the game in action.
+2️⃣ Hardware Implementation
+Flash the compiled binary (.hex) to the LPC2148 microcontroller using Flash Magic.
+Connect the LCD (16x4) and buttons as per the circuit diagram.
+Power up and start playing!
